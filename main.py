@@ -19,6 +19,13 @@ class SimulationPanel(QMainWindow):
         self.ui.l2b.valueChanged.connect(self.l2b_changed)
         self.ui.l2c.valueChanged.connect(self.l2c_changed)
 
+        self.ui.l1a_val.setText(f'{20} cm')
+        self.ui.l1b_val.setText(f'{20} cm')
+        self.ui.l1c_val.setText(f'{20} cm')
+        self.ui.l2a_val.setText(f'{20} cm')
+        self.ui.l2b_val.setText(f'{20} cm')
+        self.ui.l2c_val.setText(f'{20} cm')
+
         self.sc = Viewport3D(self, width=6, height=4, dpi=100)
         self.ui.horizontalLayout.addWidget(self.sc)
 
@@ -27,26 +34,32 @@ class SimulationPanel(QMainWindow):
 
     def l1a_changed(self, value):
         line1, line2 = self.model.update("l1a", value/100)
+        self.ui.l1a_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
     def l1b_changed(self, value):
         line1, line2 = self.model.update("l1b", value/100)
+        self.ui.l1b_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
     def l1c_changed(self, value):
         line1, line2 = self.model.update("l1c", value/100)
+        self.ui.l1c_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
     def l2a_changed(self, value):
         line1, line2 = self.model.update("l2a", value/100)
+        self.ui.l2a_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
     def l2b_changed(self, value):
         line1, line2 = self.model.update("l2b", value/100)
+        self.ui.l2b_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
     def l2c_changed(self, value):
         line1, line2 = self.model.update("l2c", value/100)
+        self.ui.l2c_val.setText(f'{value} cm')
         self.sc.draw_robot(line1, line2)
 
 def main():

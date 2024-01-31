@@ -73,10 +73,16 @@ class Ui_MainWindow(object):
         self.link1_title.setObjectName(u"link1_title")
         sizePolicy.setHeightForWidth(self.link1_title.sizePolicy().hasHeightForWidth())
         self.link1_title.setSizePolicy(sizePolicy)
+        font2 = QFont()
+        font2.setPointSize(12)
+        font2.setBold(True)
+        self.link1_title.setFont(font2)
         self.link1_title.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_3.addWidget(self.link1_title)
 
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.l1a = QSlider(self.centralwidget)
         self.l1a.setObjectName(u"l1a")
         self.l1a.setMinimum(20)
@@ -86,8 +92,18 @@ class Ui_MainWindow(object):
         self.l1a.setInvertedControls(False)
         self.l1a.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l1a)
+        self.horizontalLayout_2.addWidget(self.l1a)
 
+        self.l1a_val = QLabel(self.centralwidget)
+        self.l1a_val.setObjectName(u"l1a_val")
+
+        self.horizontalLayout_2.addWidget(self.l1a_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.l1b = QSlider(self.centralwidget)
         self.l1b.setObjectName(u"l1b")
         self.l1b.setMinimum(20)
@@ -95,8 +111,18 @@ class Ui_MainWindow(object):
         self.l1b.setOrientation(Qt.Horizontal)
         self.l1b.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l1b)
+        self.horizontalLayout_3.addWidget(self.l1b)
 
+        self.l1b_val = QLabel(self.centralwidget)
+        self.l1b_val.setObjectName(u"l1b_val")
+
+        self.horizontalLayout_3.addWidget(self.l1b_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.l1c = QSlider(self.centralwidget)
         self.l1c.setObjectName(u"l1c")
         self.l1c.setMinimum(20)
@@ -104,7 +130,15 @@ class Ui_MainWindow(object):
         self.l1c.setOrientation(Qt.Horizontal)
         self.l1c.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l1c)
+        self.horizontalLayout_4.addWidget(self.l1c)
+
+        self.l1c_val = QLabel(self.centralwidget)
+        self.l1c_val.setObjectName(u"l1c_val")
+
+        self.horizontalLayout_4.addWidget(self.l1c_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
 
         self.line = QFrame(self.centralwidget)
         self.line.setObjectName(u"line")
@@ -117,10 +151,13 @@ class Ui_MainWindow(object):
         self.link2_title.setObjectName(u"link2_title")
         sizePolicy.setHeightForWidth(self.link2_title.sizePolicy().hasHeightForWidth())
         self.link2_title.setSizePolicy(sizePolicy)
+        self.link2_title.setFont(font2)
         self.link2_title.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_3.addWidget(self.link2_title)
 
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.l2a = QSlider(self.centralwidget)
         self.l2a.setObjectName(u"l2a")
         self.l2a.setMinimum(20)
@@ -128,8 +165,18 @@ class Ui_MainWindow(object):
         self.l2a.setOrientation(Qt.Horizontal)
         self.l2a.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l2a)
+        self.horizontalLayout_5.addWidget(self.l2a)
 
+        self.l2a_val = QLabel(self.centralwidget)
+        self.l2a_val.setObjectName(u"l2a_val")
+
+        self.horizontalLayout_5.addWidget(self.l2a_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_5)
+
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.l2b = QSlider(self.centralwidget)
         self.l2b.setObjectName(u"l2b")
         self.l2b.setMinimum(20)
@@ -137,8 +184,18 @@ class Ui_MainWindow(object):
         self.l2b.setOrientation(Qt.Horizontal)
         self.l2b.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l2b)
+        self.horizontalLayout_6.addWidget(self.l2b)
 
+        self.l2b_val = QLabel(self.centralwidget)
+        self.l2b_val.setObjectName(u"l2b_val")
+
+        self.horizontalLayout_6.addWidget(self.l2b_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_6)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.l2c = QSlider(self.centralwidget)
         self.l2c.setObjectName(u"l2c")
         self.l2c.setMinimum(20)
@@ -146,7 +203,15 @@ class Ui_MainWindow(object):
         self.l2c.setOrientation(Qt.Horizontal)
         self.l2c.setTickPosition(QSlider.NoTicks)
 
-        self.verticalLayout_3.addWidget(self.l2c)
+        self.horizontalLayout_7.addWidget(self.l2c)
+
+        self.l2c_val = QLabel(self.centralwidget)
+        self.l2c_val.setObjectName(u"l2c_val")
+
+        self.horizontalLayout_7.addWidget(self.l2c_val)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_7)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout_3)
@@ -177,6 +242,12 @@ class Ui_MainWindow(object):
         self.Title.setText(QCoreApplication.translate("MainWindow", u"Soft Robot Simulation", None))
         self.Subtitle.setText(QCoreApplication.translate("MainWindow", u"Kousheek Chakraborty", None))
         self.link1_title.setText(QCoreApplication.translate("MainWindow", u"Link 1", None))
+        self.l1a_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.l1b_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.l1c_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.link2_title.setText(QCoreApplication.translate("MainWindow", u"Link 2", None))
+        self.l2a_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.l2b_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.l2c_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
     # retranslateUi
 
