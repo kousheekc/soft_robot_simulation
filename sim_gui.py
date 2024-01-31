@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QSizePolicy, QSlider, QSpacerItem,
-    QStatusBar, QVBoxLayout, QWidget)
+    QMainWindow, QSizePolicy, QSlider, QStatusBar,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -69,10 +69,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer)
-
         self.link1_title = QLabel(self.centralwidget)
         self.link1_title.setObjectName(u"link1_title")
         sizePolicy.setHeightForWidth(self.link1_title.sizePolicy().hasHeightForWidth())
@@ -83,6 +79,8 @@ class Ui_MainWindow(object):
 
         self.l1a = QSlider(self.centralwidget)
         self.l1a.setObjectName(u"l1a")
+        self.l1a.setMinimum(20)
+        self.l1a.setMaximum(80)
         self.l1a.setOrientation(Qt.Horizontal)
         self.l1a.setInvertedAppearance(False)
         self.l1a.setInvertedControls(False)
@@ -92,6 +90,8 @@ class Ui_MainWindow(object):
 
         self.l1b = QSlider(self.centralwidget)
         self.l1b.setObjectName(u"l1b")
+        self.l1b.setMinimum(20)
+        self.l1b.setMaximum(80)
         self.l1b.setOrientation(Qt.Horizontal)
         self.l1b.setTickPosition(QSlider.NoTicks)
 
@@ -99,6 +99,8 @@ class Ui_MainWindow(object):
 
         self.l1c = QSlider(self.centralwidget)
         self.l1c.setObjectName(u"l1c")
+        self.l1c.setMinimum(20)
+        self.l1c.setMaximum(80)
         self.l1c.setOrientation(Qt.Horizontal)
         self.l1c.setTickPosition(QSlider.NoTicks)
 
@@ -121,6 +123,8 @@ class Ui_MainWindow(object):
 
         self.l2a = QSlider(self.centralwidget)
         self.l2a.setObjectName(u"l2a")
+        self.l2a.setMinimum(20)
+        self.l2a.setMaximum(80)
         self.l2a.setOrientation(Qt.Horizontal)
         self.l2a.setTickPosition(QSlider.NoTicks)
 
@@ -128,6 +132,8 @@ class Ui_MainWindow(object):
 
         self.l2b = QSlider(self.centralwidget)
         self.l2b.setObjectName(u"l2b")
+        self.l2b.setMinimum(20)
+        self.l2b.setMaximum(80)
         self.l2b.setOrientation(Qt.Horizontal)
         self.l2b.setTickPosition(QSlider.NoTicks)
 
@@ -135,14 +141,12 @@ class Ui_MainWindow(object):
 
         self.l2c = QSlider(self.centralwidget)
         self.l2c.setObjectName(u"l2c")
+        self.l2c.setMinimum(20)
+        self.l2c.setMaximum(80)
         self.l2c.setOrientation(Qt.Horizontal)
         self.l2c.setTickPosition(QSlider.NoTicks)
 
         self.verticalLayout_3.addWidget(self.l2c)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer_2)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout_3)
