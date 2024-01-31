@@ -34,10 +34,8 @@ class Model:
             ])
         else:
             L = (l1 + l2 + l3) / 3
-            phi = np.arctan((np.sqrt(3) * (l2 + l3 - 2 * l1)) / (3 * (l2 - l3)))
+            phi = np.arctan2(np.sqrt(3) * (l2 + l3 - 2 * l1) , 3 * (l2 - l3))
             kappa = (2 * np.sqrt(l1**2 + l2**2 + l3**2 - l1*l2 - l1*l3 - l2*l3)) / (d * (l1 + l2 + l3))
-
-            phi = phi * np.pi / 180
 
             T = np.zeros((4, 4, 400))
             n = 400

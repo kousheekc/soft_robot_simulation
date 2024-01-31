@@ -3,8 +3,6 @@ L = (l1 + l2 + l3)/3;
 phi = atan((sqrt(3)*(l2+l3-2*l1))/(3*(l2-l3)));
 kappa = (2*sqrt(l1^2 + l2^2 + l3^2 - l1*l2 - l1*l3 - l2*l3))/(d * (l1+l2+l3));
 
-phi = phi * pi / 180;
-
 T = [];
 n = 400;
 p = [];
