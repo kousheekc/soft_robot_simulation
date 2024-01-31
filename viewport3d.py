@@ -28,10 +28,11 @@ class Viewport3D(FigureCanvasQTAgg):
 
         self.axes.grid(True)
 
-    def draw_robot(self, p):
+    def draw_robot(self, p1, p2):
         self.axes.clear()
         self.set_axes_settings()
-        self.axes.plot3D(p[:, 0], p[:, 1], p[:, 2], linestyle='-')
+        self.axes.plot3D(p1[:, 0], p1[:, 1], p1[:, 2], linestyle='-')
+        self.axes.plot3D(p2[:, 0], p2[:, 1], p2[:, 2], linestyle='-')
         self.draw()
 
 

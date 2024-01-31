@@ -1,8 +1,10 @@
 import numpy as np
 
 class Model:
-    def __init__(self, d, init_pos):
-        self.d = d
+    def __init__(self, d1, d2, init_pos):
+        self.d1 = d1
+        self.d2 = d2
+
         self.current_pos = {
             "l1a": init_pos[0],
             "l1b": init_pos[1],
@@ -14,8 +16,8 @@ class Model:
 
     def update(self, axis, new_val):
         self.current_pos[axis] = new_val
-        p = self.FKM_actuators(self.d, self.current_pos["l1a"], self.current_pos["l1b"], self.current_pos["l1c"])
-        return p
+        p1, p2 = self.FKM2_actuators(self.d1, self.d2, self.current_pos["l1a"], self.current_pos["l1b"], self.current_pos["l1c"], self.current_pos["l2a"], self.current_pos["l2b"], self.current_pos["l2c"])
+        return p1, p2
 
     def DH(self, phi, kappa, s):
         T = np.array([
@@ -47,3 +49,36 @@ class Model:
                 p[i, :] = T[0:3, 3, i]
 
         return p
+    
+    def FKM2_actuators(self, d1, d2, l1a, l1b, l1c, l2a, l2b, l2c):
+        L1 = (l1a + l1b + l1c) / 3
+        phi1 = np.arctan2(np.sqrt(3) * (l1b + l1c - 2 * l1a), 3 * (l1b - l1c))
+        kappa1 = (2 * np.sqrt(l1a**2 + l1b**2 + l1c**2 - l1a * l1b - l1a * l1c - l1b * l1c)) / (d1 * (l1a + l1b + l1c))
+
+        L2 = (l2a + l2b + l2c) / 3
+        phi2 = np.arctan2(np.sqrt(3) * (l2b + l2c - 2 * l2a), 3 * (l2b - l2c))
+        kappa2 = (2 * np.sqrt(l2a**2 + l2b**2 + l2c**2 - l2a * l2b - l2a * l2c - l2b * l2c)) / (d2 * (l2a + l2b + l2c))
+
+        L = np.array([L1, L2])
+        phi = np.array([phi1, phi2])
+        kappa = np.array([kappa1, kappa2])
+
+        n = 400
+        T01 = np.empty((4, 4, n))
+        T02 = np.empty((4, 4, n))
+        T12 = np.empty((4, 4, n))
+        p1 = np.empty((n, 3))
+        p2 = np.empty((n, 3))
+
+        for i in range(n):
+            s1 = (i - 1) * L[0] / (n - 1)
+            T01[:, :, i] = self.DH(phi[0], kappa[0], s1)
+            p1[i, :] = T01[:3, 3, i]
+
+        for j in range(n):
+            s2 = (j - 1) * L[1] / (n - 1)
+            T12[:, :, j] = self.DH(phi[1], kappa[1], s2)
+            T02[:, :, j] = np.dot(T01[:, :, n-1], T12[:, :, j])
+            p2[j, :] = T02[:3, 3, j]
+
+        return p1, p2
