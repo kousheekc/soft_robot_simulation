@@ -20,9 +20,9 @@ class Viewport3D(FigureCanvasQTAgg):
         # self.axes.set_yticklabels([])
         # self.axes.set_zticklabels([])
 
-        self.axes.set_xlim([-0.3, 0.3])
-        self.axes.set_ylim([-0.3, 0.3])
-        self.axes.set_zlim([0, 0.6])
+        self.axes.set_xlim([-0.25, 0.25])
+        self.axes.set_ylim([-0.25, 0.25])
+        self.axes.set_zlim([0, 0.5])
 
         self.axes.set_box_aspect([1, 1, 1])
 

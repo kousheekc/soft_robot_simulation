@@ -30,8 +30,8 @@ class Model:
     
     def FKM_actuators(self, d, l1, l2, l3):
         n = 400
-        T = np.empty((n, 4, 4))
-        p = np.empty((n, 3))
+        T = np.zeros((n, 4, 4))
+        p = np.zeros((n, 3))
 
         if (l1 == l2 == l3):
             p = np.array([
@@ -53,28 +53,52 @@ class Model:
     def FKM2_actuators(self, d1, d2, l1a, l1b, l1c, l2a, l2b, l2c):
         n = 400
         T01 = np.zeros((n, 4, 4))
-        T02 = np.empty((n, 4, 4))
-        T12 = np.empty((n, 4, 4))
-        p1 = np.empty((n, 3))
-        p2 = np.empty((n, 3))
+        T02 = np.zeros((n, 4, 4))
+        T12 = np.zeros((n, 4, 4))
+        p1 = np.zeros((n, 3))
+        p2 = np.zeros((n, 3))
 
-        L1 = (l1a + l1b + l1c) / 3
-        phi1 = np.arctan2(np.sqrt(3) * (l1b + l1c - 2 * l1a), 3 * (l1b - l1c))
-        kappa1 = (2 * np.sqrt(l1a**2 + l1b**2 + l1c**2 - l1a * l1b - l1a * l1c - l1b * l1c)) / (d1 * (l1a + l1b + l1c))
+        if (l1a == l1b == l1c):
+            p1 = np.array([
+                [0, 0, 0],
+                [0, 0, l1a]
+            ])
+            T01[-1, :, :] = np.array([
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, l1a],
+                [0, 0, 0, 1]
+            ])
+        else:
+            L1 = (l1a + l1b + l1c) / 3
+            phi1 = np.arctan2(np.sqrt(3) * (l1b + l1c - 2 * l1a), 3 * (l1b - l1c))
+            kappa1 = (2 * np.sqrt(l1a**2 + l1b**2 + l1c**2 - l1a * l1b - l1a * l1c - l1b * l1c)) / (d1 * (l1a + l1b + l1c))
 
-        for i in range(n):
-            s1 = (i - 1) * L1 / (n - 1)
-            T01[i, :, :] = self.DH(phi1, kappa1, s1)
-            p1[i, :] = T01[i, :3, 3]
+            for i in range(n):
+                s1 = (i - 1) * L1 / (n - 1)
+                T01[i, :, :] = self.DH(phi1, kappa1, s1)
+                p1[i, :] = T01[i, :3, 3]
 
-        L2 = (l2a + l2b + l2c) / 3
-        phi2 = np.arctan2(np.sqrt(3) * (l2b + l2c - 2 * l2a), 3 * (l2b - l2c))
-        kappa2 = (2 * np.sqrt(l2a**2 + l2b**2 + l2c**2 - l2a * l2b - l2a * l2c - l2b * l2c)) / (d2 * (l2a + l2b + l2c))
+        if (l2a == l2b == l2c):
+            p2 = np.zeros((2, 3))
+            p2[0, :] = T01[-1, :3, 3]
+            T12 = np.array([
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, l2a],
+                [0, 0, 0, 1]
+            ])
+            T02 = np.dot(T01[-1, :, :], T12)
+            p2[1, :] = T02[:3, 3]
+        else:
+            L2 = (l2a + l2b + l2c) / 3
+            phi2 = np.arctan2(np.sqrt(3) * (l2b + l2c - 2 * l2a), 3 * (l2b - l2c))
+            kappa2 = (2 * np.sqrt(l2a**2 + l2b**2 + l2c**2 - l2a * l2b - l2a * l2c - l2b * l2c)) / (d2 * (l2a + l2b + l2c))
 
-        for j in range(n):
-            s2 = (j - 1) * L2 / (n - 1)
-            T12[j, :, :] = self.DH(phi2, kappa2, s2)
-            T02[j, :, :] = np.dot(T01[n-1, :, :], T12[j, :, :])
-            p2[j, :] = T02[j, :3, 3]
+            for j in range(n):
+                s2 = (j - 1) * L2 / (n - 1)
+                T12[j, :, :] = self.DH(phi2, kappa2, s2)
+                T02[j, :, :] = np.dot(T01[n-1, :, :], T12[j, :, :])
+                p2[j, :] = T02[j, :3, 3]
 
         return p1, p2
