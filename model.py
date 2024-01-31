@@ -29,40 +29,22 @@ class Model:
         return T
     
     def FKM_actuators(self, d, l1, l2, l3):
-        if (l1 == l2 == l3):
-            p = np.array([
-                [0, 0, 0],
-                [0, 0, l1]
-            ])
-        else:
-            L = (l1 + l2 + l3) / 3
-            phi = np.arctan2(np.sqrt(3) * (l2 + l3 - 2 * l1) , 3 * (l2 - l3))
-            kappa = (2 * np.sqrt(l1**2 + l2**2 + l3**2 - l1*l2 - l1*l3 - l2*l3)) / (d * (l1 + l2 + l3))
+        n = 5
+        T = np.zeros((4, 4, n))
+        p = np.zeros((n, 3))
+    
+        L = (l1 + l2 + l3) / 3
+        phi = np.arctan2(np.sqrt(3) * (l2 + l3 - 2 * l1) , 3 * (l2 - l3))
+        kappa = (2 * np.sqrt(l1**2 + l2**2 + l3**2 - l1*l2 - l1*l3 - l2*l3)) / (d * (l1 + l2 + l3))
 
-            T = np.zeros((4, 4, 400))
-            n = 400
-            p = np.zeros((n, 3))
-
-            for i in range(n):
-                s = (i - 1) * L / (n - 1)
-                T[:, :, i] = self.DH(phi, kappa, s)
-                p[i, :] = T[0:3, 3, i]
+        for i in range(n):
+            s = (i - 1) * L / (n - 1)
+            T[:, :, i] = self.DH(phi, kappa, s)
+            p[i, :] = T[0:3, 3, i]
 
         return p
     
     def FKM2_actuators(self, d1, d2, l1a, l1b, l1c, l2a, l2b, l2c):
-        L1 = (l1a + l1b + l1c) / 3
-        phi1 = np.arctan2(np.sqrt(3) * (l1b + l1c - 2 * l1a), 3 * (l1b - l1c))
-        kappa1 = (2 * np.sqrt(l1a**2 + l1b**2 + l1c**2 - l1a * l1b - l1a * l1c - l1b * l1c)) / (d1 * (l1a + l1b + l1c))
-
-        L2 = (l2a + l2b + l2c) / 3
-        phi2 = np.arctan2(np.sqrt(3) * (l2b + l2c - 2 * l2a), 3 * (l2b - l2c))
-        kappa2 = (2 * np.sqrt(l2a**2 + l2b**2 + l2c**2 - l2a * l2b - l2a * l2c - l2b * l2c)) / (d2 * (l2a + l2b + l2c))
-
-        L = np.array([L1, L2])
-        phi = np.array([phi1, phi2])
-        kappa = np.array([kappa1, kappa2])
-
         n = 400
         T01 = np.empty((4, 4, n))
         T02 = np.empty((4, 4, n))
@@ -70,15 +52,26 @@ class Model:
         p1 = np.empty((n, 3))
         p2 = np.empty((n, 3))
 
+        L1 = (l1a + l1b + l1c) / 3
+        phi1 = np.arctan2(np.sqrt(3) * (l1b + l1c - 2 * l1a), 3 * (l1b - l1c))
+        kappa1 = (2 * np.sqrt(l1a**2 + l1b**2 + l1c**2 - l1a * l1b - l1a * l1c - l1b * l1c)) / (d1 * (l1a + l1b + l1c))
+
         for i in range(n):
-            s1 = (i - 1) * L[0] / (n - 1)
-            T01[:, :, i] = self.DH(phi[0], kappa[0], s1)
+            s1 = (i - 1) * L1 / (n - 1)
+            T01[:, :, i] = self.DH(phi1, kappa1, s1)
             p1[i, :] = T01[:3, 3, i]
 
+        L2 = (l2a + l2b + l2c) / 3
+        phi2 = np.arctan2(np.sqrt(3) * (l2b + l2c - 2 * l2a), 3 * (l2b - l2c))
+        kappa2 = (2 * np.sqrt(l2a**2 + l2b**2 + l2c**2 - l2a * l2b - l2a * l2c - l2b * l2c)) / (d2 * (l2a + l2b + l2c))
+
         for j in range(n):
-            s2 = (j - 1) * L[1] / (n - 1)
-            T12[:, :, j] = self.DH(phi[1], kappa[1], s2)
+            s2 = (j - 1) * L2 / (n - 1)
+            T12[:, :, j] = self.DH(phi2, kappa2, s2)
             T02[:, :, j] = np.dot(T01[:, :, n-1], T12[:, :, j])
             p2[j, :] = T02[:3, 3, j]
 
         return p1, p2
+
+model = Model(0.1, 0.1, [0.2, 0.2, 0.2, 0.2, 0.2, 0.2])
+model.FKM_actuators(0.1, 0.2, 0.2, 0.21)
