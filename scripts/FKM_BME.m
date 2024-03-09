@@ -20,6 +20,8 @@ xlabel('x(m)');
 ylabel('y(m)');
 zlabel('z(m)');
 
+axis equal;
+
 title('Shape kinematics reconstruction: PCC approach');
 hold on,
 plot3(p(:, 1), p(:, 2), p(:, 3), '.');

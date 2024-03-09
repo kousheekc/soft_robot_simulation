@@ -12,6 +12,8 @@ L = [La, Lb];
 phi = [phia, phib];
 kappa = [kappaa, kappab];
 
+phi = phi * pi / 180;
+
 T01 = [];
 T02 = [];
 T12 = [];
